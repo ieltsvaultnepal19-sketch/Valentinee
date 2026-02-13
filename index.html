@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine #1 ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e0,#ffb3c6,#ff8fab);
+  overflow:hidden;
+}
+
+/* Floating Hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:18px;
+  color:#ff2e63;
+  animation:fall linear infinite;
+  opacity:0.8;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10px);
+    opacity:0;
+  }
+  10%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+.container{
+  width:370px;
+  height:560px;
+  position:relative;
+  perspective:2000px;
+  z-index:2;
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  background:#fff0f6;
+  border-radius:25px;
+  box-shadow:0 30px 70px rgba(0,0,0,0.18);
+  padding:80px 30px 30px;
+  box-sizing:border-box;
+  transform-origin:left;
+  transition:transform 1.2s cubic-bezier(.4,0,.2,1);
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  flex-direction:column;
+}
+
+.page h1{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  margin-bottom:15px;
+  color:black;
+}
+
+.page p{
+  font-family:'Dancing Script',cursive;
+  font-size:20px;
+  line-height:1.7;
+  color:black;
+  margin:6px 0;
+}
+
+.page.flipped{
+  transform:rotateY(-165deg);
+  pointer-events:none;
+}
+
+.hidden{
+  display:none;
+}
+
+.final-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.final-content img{
+  width:100%;
+  max-width:200px;
+  height:auto;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="scene">
+
+<!-- INTRO PAGE -->
+<div class="page" style="z-index:7">
+  <p>Today isn’t just Valentine’s Day.</p>
+  <br>
+  <p>It’s the beginning of something</p>
+  <p>we’ll celebrate for a lifetime.</p>
+  <br><br>
+  <p style="font-size:16px;">Tap gently to open Chapter One.</p>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page hidden" style="z-index:6">
+  <h1>Happy Valentine’s Day, My Wifeey ❤️</h1>
+  <p>Valentine #1</p>
+  <br>
+  <p>And it already feels unforgettable.</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" style="z-index:5">
+  <p>This is our first Valentine together.</p>
+  <p>Your first.</p>
+  <p>Mine too.</p>
+  <br>
+  <p>And I love that we get to experience this</p>
+  <p>for the very first time —</p>
+  <p>with each other.</p>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page hidden" style="z-index:4">
+  <p>Not flowers.</p>
+  <p>Not chocolates.</p>
+  <p>Not the date.</p>
+  <br>
+  <p>What makes today special</p>
+  <p>is that it marks the beginning</p>
+  <p>of something that will repeat</p>
+  <p>for the rest of our lives.</p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page hidden" style="z-index:3">
+  <p>Imagine us years from now…</p>
+  <br>
+  <p>Valentine #10.</p>
+  <p>Valentine #25.</p>
+  <p>Valentine #50.</p>
+  <br>
+  <p>Still choosing each other.</p>
+  <p>Still celebrating.</p>
+  <p>Still smiling the same way.</p>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page hidden" style="z-index:2">
+  <p>There are more than 70 Valentines waiting for us.</p>
+  <br>
+  <p>And I don’t just want to count them.</p>
+  <p>I want to build them.</p>
+  <p>Grow through them.</p>
+  <p>Laugh through them.</p>
+  <p>Win life together through them.</p>
+</div>
+
+<!-- PAGE 6 FINAL -->
+<div class="page hidden" style="z-index:1">
+  <div class="final-content">
+    <p>The best part?</p>
+    <br>
+    <p>This is only Valentine #1.</p>
+    <br>
+    <p>And I already know —</p>
+    <p>the story only gets better from here. ❤️</p>
+
+    <img src="valentine.gif" alt="Valentine GIF">
+  </div>
+</div>
+
+</div>
+
+<script>
+let index = 0;
+const pages = document.querySelectorAll(".page");
+
+document.getElementById("scene").addEventListener("click", function(){
+  if(index < pages.length - 1){
+    pages[index + 1].classList.remove("hidden");
+    pages[index].classList.add("flipped");
+    index++;
+  }
+});
+
+/* Generate floating hearts */
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  heart.style.fontSize = (14 + Math.random() * 10) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 10000);
+}
+
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
